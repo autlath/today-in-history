@@ -1,0 +1,36 @@
+name: daily-update
+
+# 每天北京时间 00:00(UTC 16:00)自动重新生成 index.html 并推送,
+# Vercel 检测到 push 后自动部署 —— 全程零后端。
+on:
+  schedule:
+    - cron: '0 16 * * *'
+  workflow_dispatch: {} # 允许手动触发,便于调试
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate today's page
+        run: node scripts/build.mjs
+
+      - name: Commit & push
+        run: |
+          git config user.name  "daily-bot"
+          git config user.email "daily-bot@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: 历史上的今天 $(TZ=Asia/Shanghai date +%Y-%m-%d)"
+          git push
