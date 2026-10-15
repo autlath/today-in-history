@@ -142,15 +142,15 @@ function render(model) {
 
   const sections = [];
   if (selected.length) sections.push(
-    section('selected', 'Selected · 头条', '今日精选', `凡 ${selected.length} 则`, `<div class="sel-grid">${selectedHTML}</div>`));
+    section('selected', 'Selected · 头条', '今日精选', `共 ${selected.length} 则`, `<div class="sel-grid">${selectedHTML}</div>`));
   if (events.length) sections.push(
-    section('events', 'Chronicle · 编年', '大事记', `凡 ${events.length} 则`, `<div class="timeline">${eventsHTML}<p class="filter-empty" aria-live="polite"></p></div>`));
+    section('events', 'Chronicle · 编年', '大事记', `共 ${events.length} 则`, `<div class="timeline">${eventsHTML}<p class="filter-empty" aria-live="polite"></p></div>`));
   if (births.length) sections.push(
-    section('births', 'Born · 诞辰', '诞辰', `凡 ${births.length} 人`, `<div class="people-grid">${peopleHTML(births)}</div>`));
+    section('births', 'Born · 诞辰', '诞辰', `共 ${births.length} 人`, `<div class="people-grid">${peopleHTML(births)}</div>`));
   if (deaths.length) sections.push(
-    section('deaths', 'In Memoriam · 谢世', '逝世', `凡 ${deaths.length} 人`, `<div class="people-grid">${peopleHTML(deaths)}</div>`));
+    section('deaths', 'In Memoriam · 谢世', '逝世', `共 ${deaths.length} 人`, `<div class="people-grid">${peopleHTML(deaths)}</div>`));
   if (holidays.length) sections.push(
-    section('holidays', 'Calendar · 节候', '节日', `凡 ${holidays.length} 项`, `<div class="holiday-list">${holidaysHTML}</div>`));
+    section('holidays', 'Calendar · 节候', '节日', `共 ${holidays.length} 项`, `<div class="holiday-list">${holidaysHTML}</div>`));
 
   return `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -158,7 +158,7 @@ function render(model) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>历史上的今天 · ${cnM}月${cnD}日</title>
-<meta name="description" content="历史上的今天,${+MM} 月 ${+DD} 日:大事记 ${events.length} 则、诞辰 ${births.length} 人、逝世 ${deaths.length} 人。每日零点自动更新,纯静态页面。">
+<meta name="description" content="历史上的今天,${+MM} 月 ${+DD} 日:大事记 ${events.length} 则、诞辰 ${births.length} 人、逝世 ${deaths.length} 人。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='9' fill='%23a63a2b'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='%23f5efdf' font-family='serif' font-weight='700'%3E%E5%8F%B2%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -172,11 +172,11 @@ function render(model) {
       <h1 class="mast-date rise" style="--i:2">${cnM}月${cnD}日</h1>
       <p class="mast-sub rise" style="--i:3">
         <span class="latin">${MONTHS[+MM - 1]} ${+DD}, ${YEAR}</span>
-        <span class="dot">·</span>${WEEKDAY}<span class="dot">·</span>凡 ${total} 则档案
+        <span class="dot">·</span>${WEEKDAY}<span class="dot">·</span>共 ${total} 则档案
       </p>
     </div>
     <dl class="mast-stats rise" style="--i:4">${statsHTML}</dl>
-    <div class="seal rise" style="--i:5" aria-hidden="true"><span class="seal-text">以史为鉴</span></div>
+    <div class="seal rise" style="--i:5" aria-hidden="true"><span class="seal-text">以史·为鉴</span></div>
   </header>
 
 </div>
